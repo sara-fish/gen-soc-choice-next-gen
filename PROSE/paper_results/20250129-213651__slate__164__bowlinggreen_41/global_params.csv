@@ -1,0 +1,2 @@
+word_budget,budget_schedule,approval_levels,full_approval_generation,full_pool_selection,no_budgets
+164,"[80, 60, 40, 36, 32, 28, 24, 20, 16, 12, 8, 4]","[5.5, 5, 4.5, 4, 3.5, 3, 2, 1, 0]",False,True,False
