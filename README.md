@@ -2,7 +2,9 @@
 
 This repo contains the code and data associated with the paper [Generative Social Choice: The Next Generation](https://procaccia.info/wp-content/uploads/2025/01/nextgen.pdf).
 
-Authors: [Niclas Boehmer](https://www.niclas-boehmer.com/), [Sara Fish](https://sara-fish.github.io/), [Ariel Procaccia](https://procaccia.info/)
+Authors: [Niclas Boehmer](https://www.niclas-boehmer.com/), [Sara Fish](https://sara-fish.github.io/), [Ariel Procaccia](https://procaccia.info/) 
+
+In case you have any questions regarding the code, please reach out to [niclas.boehmer@hpi.de](mailto:niclas.boehmer@hpi.de) and [sfish@g.harvard.edu](mailto:sfish@g.harvard.edu).
 
 # Setup instructions
 
@@ -14,7 +16,7 @@ Authors: [Niclas Boehmer](https://www.niclas-boehmer.com/), [Sara Fish](https://
 
 To reproduce the results from Section 3.4 run:
 ```
-python3 PROSE/synthetic_experiments/main.py
+python3 synthetic_experiments/main.py
 ```
 All parameter configurations that need to be executed to reproduce the results shown in the paper can be found in `approx_final.slurm`. 
 
@@ -82,7 +84,7 @@ python3 PROSE/generate_scripts/generate_tags.py --dataset PROSE/datasets/bowling
 Ultimately, our generative query implementations rely on each `Agent` object having the following attributes:
 - `id`: unique string ID of agent
 - `data`: raw string representation of agent's opinion
-- (LLM-generated) `summary`: raw string representation of agent's opinion to be used in LLM queries
+- `summary`: raw string representation of agent's opinion to be used in LLM queries
     - In this paper, we set `agent.summary = agent.data`. 
     - For applications where `agent.data` is not appropriate for direct use in LLM queries, one can optionally distill the content of `agent.data` and save it to `agent.summary` 
 - (LLM-generated) `tags`: dict mapping each tag attribute (same for all agents) to a numeric score reflecting the extent to which that attribute reflects that agent. (`agent.tags.values()` is then used as that agent's embedding vector)
@@ -97,9 +99,9 @@ To construct custom agents and queries, implement subclasses of the interface cl
 
 #### Option 1: Following the PROSE experiments from our paper 
 
-*If generating summaries and tags using our scripts:* Edit the method `get_data_filenames` in `datasets/load.py` to return the filenames for the data, summaries, tags, and topic for your use case. Then the script `generate_scripts/generate_slate.py` should work out of the box. 
+*If summaries and tags were generated using our scripts:* Edit the method `get_data_filenames` in `datasets/load.py` to return the filenames for the data, summaries, tags, and topic for your use case. Then the script `generate_scripts/generate_slate.py` should work out of the box. 
 
-*If generating summaries and tags a different way:* In the `if __name__ == "__main__":` part of the file, modify the current code that creates an `Agent` object for each agent to instead create an `Agent` object using your summaries and tags. The rest of the script should work the same. 
+*If summaries and tags were not generated using our scripts:* In the `if __name__ == "__main__":` part of the file, modify the current code that creates an `Agent` object for each agent to instead create an `Agent` object using your summaries and tags. The rest of the script should work the same. 
 
 #### Option 2: Running PROSE using custom agents and different queries
 
